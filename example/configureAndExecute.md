@@ -31,7 +31,7 @@ A sample single depth client-issuer relationship can be seen here:
 ![alt text](https://github.com/dwille-axway/PKI-Client-Mutual-Auth/blob/master/example/src/trafficMonitor.png "Traffic Monitor")
 
 ## API Management Version Compatibility
-This artifact was successfully tested for the following versions:
+This artefact was successfully tested for the following versions:
 - V7.5.3
 
 ## Contributing
