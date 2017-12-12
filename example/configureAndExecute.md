@@ -8,6 +8,8 @@ To follow this example you will need the following:
 - A client public/private key pair with a single depth level.
 - The issuer public certificate.
 - A directory to lookup customer attributes.
+- The policy export file that is part of this repository.
+- Basic working knowledge of the Axway API Gateway software and Policy Studio.
 
 A sample single depth client-issuer relationship can be seen here:
 ![alt text](https://github.com/dwille-axway/PKI-Client-Mutual-Auth/blob/master/example/src/certificateChain.png "Certificate and Issuer")
@@ -18,10 +20,18 @@ A sample single depth client-issuer relationship can be seen here:
 ![alt text](https://github.com/dwille-axway/PKI-Client-Mutual-Auth/blob/master/example/src/cacertImport.png "Configure CA Trust")
 2. Navigate to 'Environment Configuration --> Listeners --> API Gateway --> Default Services --> Ports'. Click 'Add --> HTTPS Interface'. Fill out information on the Network tab and select a CA certificate. On the Mutual Auth tab choose to 'Require Client Certificates' with a depth of "1", then search for and select the issuer CA. This will allow the API Gateway to provide a CA list during the SSL handshake to give clients browsers/applications of trusted CAs, require submission of a client certificate on calls to protected resources on the associated port, and enforce issuance of the submitted certificate only to selected trusted CAs.
 ![alt text](https://github.com/dwille-axway/PKI-Client-Mutual-Auth/blob/master/example/src/mutualAuth.png "Configure Mutual Auth")
+3. Navigate to 'File --> Import --> Import Customization Fragment'. Select the policy fragment supplied in this repository. Resolve any dependency issues and complete import.
+![alt text](https://github.com/dwille-axway/PKI-Client-Mutual-Auth/blob/master/example/src/importFrag.png "Import Policy Fragment")
+4. Modify the policy to meet your environmental configuration as defined in this repo's readme. For my testing, I disabled the OCSP validation policy as my implementation did not allow external connections to an OCSP server for this example.
+5. Create a new policy with a response message (Set Message Filter and Reflect Message Filter). Drop a policy shortcut filter into the policy and choose the newly imported policy fragment. Set the shortcut as the starting filter. Create relative path.
+![alt text](https://github.com/dwille-axway/PKI-Client-Mutual-Auth/blob/master/example/src/sampleEchoPolicy.png "Sample Echo Policy")
+6. Deploy.
+7. Ensure your client certificate is available to your test client and execute a request against your new service. Select the appropriate client key.
+8. Post response, log into the API Gateway Manager, navigate to the Traffic Monitor, and confirm policy execution with use of your imported policy.
+![alt text](https://github.com/dwille-axway/PKI-Client-Mutual-Auth/blob/master/example/src/trafficMonitor.png "Traffic Monitor")
 
-
-## API Management Version Compatibilty
-This artefact was successfully tested for the following versions:
+## API Management Version Compatibility
+This artifact was successfully tested for the following versions:
 - V7.5.3
 
 ## Contributing
