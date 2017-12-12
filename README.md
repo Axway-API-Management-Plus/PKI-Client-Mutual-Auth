@@ -1,7 +1,7 @@
 # PKI-Client-Mutual-Auth
 Sample to create PKI client authentication with validation and RBAC authorization with mutual authentication enforcement.
 
-# Description
+## Description
 
 This policy is meant to serve as a template for customers looking to enforce certificate authentication as a login or access mechanism. This is a very basic policy to provide a framework for this process, and can be extended to provide more in depth fine grain authorization controls. 
 
